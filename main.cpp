@@ -2,38 +2,103 @@
 #include "tree.cpp"
 #include <fstream>
 #include <string>
-int main() {
+int main()
+{
     std::vector<page> pageTree;
     std::ifstream fin;
     fin.open("tree");
-    char line[2048];
-
-    while(!fin.eof()){
-        page pageNode;
-        fin.getline(line, 2048);
-        fin.getline(line, 2048);
-        std::string name;
-        std::string text;
-
-        fin.getline(line, 2048);
-        name = line;
-        fin.getline(line, 2048);
-        text = line;
-        fin.getline(line, 2048);
-
-        std::string line1;
-        line1 = line;
-
-        while(line1 != ")"){
-            pageNode.link.push_back(atoi(line1.c_str()));
-            fin.getline(line, 2048);
-            line1 = line;
+    std::string s;
+    page p;
+    fin >> s;
+    if (s == "[")
+    {
+        while (s != "]")
+        {
+            if (s == "[")
+            {
+                fin >> s;
+                continue;
+            }
+            if (s == "(")
+            {
+                while (s != ")")
+                {
+                    if (s == "(")
+                    {
+                        fin >> s;
+                        continue;
+                    }
+                    if (s == "name")
+                    {
+                        fin >> s;
+                        std::string name;
+                        char c = '\0';
+                        fin.get(c);
+                        fin.get(c);
+                        fin.get(c);
+                        while (c != '\"')
+                        {
+                            name += c;
+                            fin.get(c);
+                        }
+                        p.name = name;
+                    }
+                    if (s == "text")
+                    {
+                        fin >> s;
+                        std::string text;
+                        char c = '\0';
+                        fin.get(c);
+                        fin.get(c);
+                        fin.get(c);
+                        while (c != '\"')
+                        {
+                            text += c;
+                            fin.get(c);
+                        }
+                        p.text = text;
+                    }
+                    if (s == "{")
+                    {
+                        while (s != "}")
+                        {
+                            if (s == "{")
+                            {
+                                fin >> s;
+                                continue;
+                            }
+                            int link = atoi(s.c_str());
+                            std::string ans;
+                            char c = '\0';
+                            fin.get(c);
+                            fin.get(c);
+                            fin.get(c);
+                            fin.get(c);
+                            fin.get(c);
+                            while (c != '\"')
+                            {
+                                ans += c;
+                                fin.get(c);
+                            }
+                            p.link[link] = ans;
+                            fin >> s;
+                        }
+                        fin >> s;
+                    }
+                    if (s != ")")
+                    {
+                        fin >> s;
+                    }
+                }
+                pageTree.push_back(p);
+                p = page();
+            }
+            if (s != "]")
+            {
+                fin >> s;
+            }
         }
-        pageNode.name = name;
-        pageNode.text = text;
-        pageTree.push_back(pageNode);
     }
-    
-
+    //Конец загрузки
     return 0;
 }

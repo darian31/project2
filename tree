@@ -1,19 +1,38 @@
+[
 (
-    0
-    name
-    text
-    1
+name : "name1
+next Line
+ Line 3"
+text : "text
+Text line 1
+Text line 2
+ text line 3
+ text line 4"
+{
+0 : "text"
+1 : "ans wer dfadfsfda sdfs
+asdfagsa
+adf sdf sadf f"
+2 : "a
+f
+
+adfsad"
+}
 )
 (
-    1
-    name1
-    text1
-    0
-    2
+name : "name2"
+text : "text"
+{
+2 : "a
+
+nswer"
+}
 )
 (
-    2
-    name2
-    text2
-    1
+name : "name 3"
+text : "text text test
+test"
+{
+}
 )
+]
