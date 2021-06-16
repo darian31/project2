@@ -100,5 +100,24 @@ int main()
         }
     }
     //Конец загрузки
+
+    int page = 0;
+    while (true)
+    {
+        std::cout << pageTree[page].name << "\n" << pageTree[page].text << "\n";
+        std::map<int, std::string>::iterator it = pageTree[page].link.begin();
+        int i = 1;
+        std::vector<int> l;
+        for (; it != pageTree[page].link.end(); it++)
+        {
+            std::cout << "[" << i << "] : " << it->second << "\n";
+            l.push_back(it->first);
+            i++;
+        }
+
+        std::cin >> page;
+        page = l[page - 1];
+    }
+
     return 0;
 }
