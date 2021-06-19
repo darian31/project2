@@ -2,6 +2,14 @@
 #include "tree.cpp"
 #include <fstream>
 #include <string>
+
+#define RED	"\x1b[31m"
+#define GREEN   "\x1b[32m"
+#define YELLOW  "\x1b[33m"
+#define BLUE    "\x1b[34m"
+#define MAGNETA "\x1b[35m"
+#define CYAN    "\x1b[36m"
+#define RESET   "\x1b[0m"
 int main()
 {
     std::vector<page> pageTree;
@@ -104,7 +112,7 @@ int main()
     int page = 0;
     while (true)
     {
-        std::cout << pageTree[page].name << "\n" << pageTree[page].text << "\n";
+        std::cout << RED << pageTree[page].name << RESET << "\n" << pageTree[page].text << "\n";
         std::map<int, std::string>::iterator it = pageTree[page].link.begin();
         int i = 1;
         std::vector<int> l;

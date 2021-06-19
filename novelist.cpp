@@ -2,24 +2,60 @@
 #include <map>
 #include <vector>
 #include <fstream>
+#include <iostream>
+struct cmd {
+    std::string cmd;
+    std::map<std::string, std::string> param;
+};
 int main() {
+    setlocale(LC_ALL, "rus");
     std::vector<page> Tree;
     std::map<int, std::string> l;
-    l[0] = "text";
-    l[1] = "ans wer dfadfsfda sdfs\nasdfagsa\nadf sdf sadf f";
-    l[2] = "a\nf\n\nadfsad";
-    Tree.push_back(page("name1\nnext Line\n Line 3", 
-    "text\nText line 1\nText line 2\n text line 3\n text line 4", l));
-    l.clear();
 
-    
-    l[2] = "a\n\nnswer";
-    Tree.push_back(page("name2", 
-    "text", l));
-    l.clear();
+    cmd command;
+    while(true){
+        std::string line;// = "command -param1 \"value 1\" -param2 \"value2\" -param3 \"val ue 3\"";
+        
+        getline(std::cin, line, '\n');
+        line += " ";
+        command.cmd = line.substr(0, line.find(" "));
+        line.erase(0, line.find(" ") + 1);
 
-    Tree.push_back(page("name 3", "text text test\ntest", l));
-    l.clear();
+        while(int p = line.find("-") != -1){
+            std::string param = "";
+            while(line[0] != ' '){
+                param += line[0];
+                line.erase(0,1);
+            }
+            line.erase(0,1);
+            std::string value = "";
+            if(line.length() != 0){
+                if(line[0] == '"'){
+                    line.erase(0,1);
+                    while(line[0] != '"'){
+                        value += line[0];
+                        line.erase(0,1);
+                    }
+                    line.erase(0,1);
+                } else {
+                    while(line[0] != ' '){
+                        value += line[0];
+                        line.erase(0,1);
+                    }
+                }
+                line.erase(0,1);
+            }
+            command.param[param] = value;
+        }
+
+        if(command.cmd == "выход"){
+            return 0;
+        }
+        if(command.cmd == "создать"){
+            std::string name = command.param["название"];
+            std::string from = command.param["из"];
+        }
+    }
     
     std::ofstream fout;
     fout.open("tree");
