@@ -12,7 +12,7 @@ struct page{
         std::string text;
         ///Библиотека путей, ведущих из страницы
         std::map<int, std::string> link;
-        
+
         page(std::string name_, std::string text_, std::map<int, std::string> link_) {
             name = name_;
             text = text_;
@@ -20,3 +20,7 @@ struct page{
         }
         page() {}
 };
+
+///Проверка айди, если айди содержит символы, то выводит false, но если все в
+///порядке, то true
+bool checkid(std::string id);

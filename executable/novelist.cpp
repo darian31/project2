@@ -1,4 +1,4 @@
-#include "pages.h"
+#include "pages.hpp"
 #include <fstream>
 #include <iostream>
 #include <map>
@@ -10,15 +10,6 @@
 ///Доступные новеллы
 std::vector<std::string> novells;
 
-///Проверка айди, если айди содержит символы, то выводит false, но если все в
-///порядке, то true
-bool checkid(std::string id) {
-    for (int i = 0; i < id.length(); i++)
-        if (!std::isdigit(id[i]))
-            return false;
-
-    return true;
-}
 ///Команда.
 /// std::string cmd - название команды
 /// std::map<std::string, std::string> param - параметры команды, через "-"
@@ -92,6 +83,7 @@ bool showByID(std::string id) {
                   << " : " << it->second << '\n';
     }
     std::cout << "Текст:\n" << Pages[i].text;
+    return true;
 }
 
 ///Показать страницу по названию, если айди введен неверно на выходе выведет
@@ -111,6 +103,7 @@ bool showByName(std::string name) {
             break;
         }
     }
+    return true;
 }
 
 ///Добавляет путь из std::string from в std::string where, from и where это айди
@@ -196,7 +189,7 @@ bool open(std::string file) {
         return false;
     }
     int i = 0;
-    for(i; i < novells.size(); i++){
+    for(; i < novells.size(); i++){
         if(novells[i] == file){
             break;
         }
@@ -329,6 +322,7 @@ bool deletePage(std::string idstr) {
     std::cout << "Комната с id " << id
               << " была удалена, все id комнат с id выше " << id
               << " были снижены на 1\n";
+    return true;
 }
 
 
@@ -353,14 +347,14 @@ int main() {
                         break;
                 }
                 novells.push_back(n);
-                std::cout << n << '\n';
+                std::cout <<"[*]" << n << '\n';
             }
         }
     } else {
         std::cout << "Ошибка открытия директории\n";
     }
     std::cout << "Чтобы открыть уже сохраненную новеллу введите \n \"открыть "
-                 "-файл название\n";
+                 "-файл название\"\n";
 
     while (true) {
         command.getcommand();

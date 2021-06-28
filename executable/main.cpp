@@ -1,4 +1,4 @@
-#include "pages.h"
+#include "pages.hpp"
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -153,14 +153,14 @@ int main() {
     }
     //Конец загрузки
 
-    int page = 0;
+    int page_ = 0;
     while (true) {
-        std::cout << RED << pageTree[page].name << RESET << "\n"
-                  << pageTree[page].text << "\n";
-        std::map<int, std::string>::iterator it = pageTree[page].link.begin();
+        std::cout << RED << pageTree[page_].name << RESET << "\n"
+                  << pageTree[page_].text << "\n";
+        std::map<int, std::string>::iterator it = pageTree[page_].link.begin();
         int i = 1;
         std::vector<int> l;
-        for (; it != pageTree[page].link.end(); it++) {
+        for (; it != pageTree[page_].link.end(); it++) {
             std::cout << "[" << i << "] : " << it->second << "\n";
             l.push_back(it->first);
             i++;
@@ -169,9 +169,9 @@ int main() {
         while (true) {
             std::cin >> page_str;
             if (check(page_str)) {
-                page = std::atoi(page_str.c_str());
-                if (page > 0 && page <= l.size()) {
-                    page = l[page - 1];
+                page_ = std::atoi(page_str.c_str());
+                if (page_ > 0 && page_ <= l.size()) {
+                    page_ = l[page_ - 1];
                     break;
                 } else {
                     std::cout << "Неверно указан номер\n";
