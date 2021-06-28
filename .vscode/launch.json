@@ -5,17 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "g++ - Сборка и отладка активного файла",
+            "name": "clang++ - Сборка и отладка активного файла",
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${fileDirname}",
             "environment": [],
-            "externalConsole": false,
+            "externalConsole": true,
             "MIMode": "lldb",
-            "preLaunchTask": "C/C++: g++ сборка активного файла"
+            "preLaunchTask": "C/C++: clang++ сборка активного файла ver(1)"
         }
     ]
 }
